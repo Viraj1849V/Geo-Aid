@@ -111,6 +111,31 @@ Geo-Aid combines:
 
 ---
 
+## Deployment
+
+The project is deployed using Render (Flask + Gunicorn).
+
+---
+
+## Limitations (Current)
+
+Uses prototype-level data in some modules
+Limited real-time API integration
+No full-scale database yet
+Designed as MVP (Minimum Viable Product)
+
+---
+
+## Authors
+
+Viraj Pathare
+Ayush Chandwadkar
+Aryan Patel
+Heet Oswal
+Dr. Sandhya Waghere
+
+---
+
 ## 🛠️ Installation & Setup
 
 ```bash
@@ -120,22 +145,3 @@ pip install -r requirements.txt
 python app2.py
 
 ---
-
-## Deployment
-
-The project is deployed using Render (Flask + Gunicorn).
-
-## Limitations (Current)
-
-Uses prototype-level data in some modules
-Limited real-time API integration
-No full-scale database yet
-Designed as MVP (Minimum Viable Product)
-
-## Authors
-
-Viraj Pathare
-Ayush Chandwadkar
-Aryan Patel
-Heet Oswal
-Dr. Sandhya Waghere
