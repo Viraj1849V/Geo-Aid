@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Forum - GeoAid</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+          url("photos_bg/wall1.jpg") no-repeat center center fixed;
+        background-size: cover;
+        color: #1d1c1c;
+        padding-top: 70px;
+      }
+
+      /* Navbar */
+      .custom-navbar {
+        background: linear-gradient(135deg, #69cae0, #da935d) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        height: 70px;
+      }
+
+      .custom-navbar .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: white !important;
+      }
+
+      .custom-navbar .nav-link {
+        color: white !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        margin: 0 10px;
+      }
+
+      .custom-navbar .nav-link:hover {
+        color: #f3dc5b !important;
+        transform: translateY(-2px);
+      }
+
+      /* Hero Section */
+      .hero {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(105, 202, 224, 0.8),
+            rgba(218, 147, 93, 0.8)
+          ),
+          url("photos_bg/wall1.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        margin-top: 70px;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .hero h1 {
+        position: relative;
+        z-index: 2;
+        font-size: 3rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero p {
+        position: relative;
+        z-index: 2;
+        font-size: 1.3rem;
+        margin-top: 10px;
+      }
+
+      /* Main Container */
+      .container-forum {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      /* Forum Layout */
+      .forum-grid {
+        display: grid;
+        grid-template-columns: 1fr 350px;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      /* New Thread Button */
+      .btn-new-thread {
+        background: linear-gradient(135deg, #69cae0, #da935d);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 30px;
+        font-size: 1rem;
+      }
+
+      .btn-new-thread:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Thread List */
+      .threads-section {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .threads-header {
+        background: linear-gradient(135deg, #69cae0, #da935d);
+        color: white;
+        padding: 20px;
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      .thread-item {
+        border-bottom: 1px solid #eee;
+        padding: 20px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border-left: 4px solid #69cae0;
+      }
+
+      .thread-item:hover {
+        background: #f9f9f9;
+        border-left-color: #da935d;
+        transform: translateX(5px);
+      }
+
+      .thread-item:last-child {
+        border-bottom: none;
+      }
+
+      .thread-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #20576e;
+        margin-bottom: 8px;
+        word-break: break-word;
+      }
+
+      .thread-meta {
+        display: flex;
+        gap: 15px;
+        font-size: 0.9rem;
+        color: #999;
+        flex-wrap: wrap;
+      }
+
+      .thread-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .thread-preview {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .sidebar-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .sidebar-card h3 {
+        color: #20576e;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .stats-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .stats-item:last-child {
+        border-bottom: none;
+      }
+
+      .stats-label {
+        color: #666;
+        font-weight: 500;
+      }
+
+      .stats-value {
+        color: #69cae0;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+
+      .tags-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        background: #f0f0f0;
+        color: #20576e;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .tag:hover {
+        background: #69cae0;
+        color: white;
+      }
+
+      /* Modal Styles */
+      .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #69cae0, #da935d);
+        color: white;
+        border-radius: 15px 15px 0 0;
+        border: none;
+      }
+
+      .modal-header .btn-close {
+        filter: brightness(0) invert(1);
+      }
+
+      .form-control:focus {
+        border-color: #69cae0;
+        box-shadow: 0 0 0 0.2rem rgba(105, 202, 224, 0.25);
+      }
+
+      .btn-submit {
+        background: linear-gradient(135deg, #69cae0, #da935d);
+        color: white;
+        border: none;
+        font-weight: 600;
+      }
+
+      .btn-submit:hover {
+        background: linear-gradient(135deg, #5ab5d0, #c9854e);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Thread Detail View */
+      .thread-detail {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        display: none;
+      }
+
+      .thread-detail.active {
+        display: block;
+      }
+
+      .thread-detail-header {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+      }
+
+      .thread-detail-title {
+        font-size: 2rem;
+        color: #20576e;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .thread-detail-meta {
+        display: flex;
+        gap: 20px;
+        color: #999;
+        font-size: 0.95rem;
+        flex-wrap: wrap;
+      }
+
+      .thread-detail-meta span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .thread-author-badge {
+        background: #69cae0;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .thread-content {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 30px;
+        font-size: 1rem;
+      }
+
+      /* Comments Section */
+      .comments-section {
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 2px solid #eee;
+      }
+
+      .comments-title {
+        font-size: 1.3rem;
+        color: #20576e;
+        font-weight: 700;
+        margin-bottom: 25px;
+      }
+
+      .comment-box {
+        background: #f9f9f9;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 4px solid #69cae0;
+      }
+
+      .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .comment-author {
+        font-weight: 600;
+        color: #20576e;
+      }
+
+      .comment-date {
+        font-size: 0.85rem;
+        color: #999;
+      }
+
+      .comment-content {
+        color: #666;
+        line-height: 1.6;
+        word-break: break-word;
+      }
+
+      .comment-actions {
+        margin-top: 12px;
+        display: flex;
+        gap: 15px;
+        font-size: 0.9rem;
+      }
+
+      .comment-action {
+        cursor: pointer;
+        color: #69cae0;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .comment-action:hover {
+        color: #da935d;
+      }
+
+      /* Reply Input */
+      .reply-box {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 30px;
+      }
+
+      .reply-box h4 {
+        color: #20576e;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .reply-textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        resize: vertical;
+        min-height: 120px;
+        transition: all 0.3s ease;
+      }
+
+      .reply-textarea:focus {
+        border-color: #69cae0;
+        outline: none;
+        box-shadow: 0 0 8px rgba(105, 202, 224, 0.3);
+      }
+
+      .reply-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .btn-reply {
+        background: linear-gradient(135deg, #69cae0, #da935d);
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-reply:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-cancel {
+        background: #e0e0e0;
+        color: #333;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-cancel:hover {
+        background: #d0d0d0;
+      }
+
+      .back-button {
+        background: #e0e0e0;
+        color: #333;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .back-button:hover {
+        background: #d0d0d0;
+      }
+
+      /* Loading State */
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+      }
+
+      .spinner {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #69cae0;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 50px 20px;
+        color: #666;
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        color: #ccc;
+        margin-bottom: 15px;
+      }
+
+      .empty-state p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+      }
+
+      /* Footer */
+      footer {
+        background: #20576e;
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      footer a {
+        color: #69cae0;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: #da935d;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .forum-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .thread-detail-title {
+          font-size: 1.5rem;
+        }
+
+        .thread-detail-meta {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      .success-message {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .success-message.show {
+        display: block;
+      }
+
+      .error-message {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .error-message.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="home.html">
+          <i class="fas fa-globe"></i> GeoAid
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html"
+                ><i class="fas fa-home"></i> Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about_us.html"
+                ><i class="fas fa-info-circle"></i> About</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="resource.html"
+                ><i class="fas fa-cubes"></i> Resources</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="live_news.html"
+                ><i class="fas fa-newspaper"></i> Live News</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="forum.html"
+                ><i class="fas fa-comments"></i> Forum</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Donation.html"
+                ><i class="fas fa-donate"></i> Donate</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div>
+        <h1>Community Forum</h1>
+        <p>
+          Share updates, ask questions, and connect with disaster relief
+          volunteers
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container-forum">
+      <div class="success-message" id="successMessage"></div>
+      <div class="error-message" id="errorMessage"></div>
+
+      <!-- Forum Grid -->
+      <div class="forum-grid">
+        <!-- Main Forum Content -->
+        <div>
+          <!-- New Thread Button -->
+          <button
+            class="btn-new-thread"
+            data-bs-toggle="modal"
+            data-bs-target="#newThreadModal"
+          >
+            <i class="fas fa-plus"></i> Start a New Discussion
+          </button>
+
+          <!-- Threads List View -->
+          <div id="threadsView">
+            <div class="threads-section">
+              <div class="threads-header">
+                <i class="fas fa-list"></i> Recent Discussions
+              </div>
+              <div id="threadsList" class="threads-list">
+                <div class="loading">
+                  <div class="spinner"></div>
+                  <p>Loading discussions...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thread Detail View -->
+          <div id="threadDetailView" class="thread-detail">
+            <button class="back-button" onclick="backToThreadsList()">
+              <i class="fas fa-arrow-left"></i> Back to Discussions
+            </button>
+            <div class="thread-detail-header">
+              <h1 class="thread-detail-title" id="detailTitle"></h1>
+              <div class="thread-detail-meta" id="detailMeta"></div>
+            </div>
+            <div class="thread-content" id="detailContent"></div>
+
+            <div class="comments-section">
+              <h3 class="comments-title">Comments</h3>
+              <div id="commentsList"></div>
+            </div>
+
+            <div class="reply-box">
+              <h4><i class="fas fa-reply"></i> Add Your Comment</h4>
+              <textarea
+                class="reply-textarea"
+                id="replyInput"
+                placeholder="Share your thoughts or updates..."
+              ></textarea>
+              <div class="reply-buttons">
+                <button class="btn-reply" onclick="submitReply()">
+                  <i class="fas fa-paper-plane"></i> Post Comment
+                </button>
+                <button class="btn-cancel" onclick="clearReply()">
+                  <i class="fas fa-times"></i> Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Forum Stats -->
+          <div class="sidebar-card">
+            <h3><i class="fas fa-chart-bar"></i> Forum Stats</h3>
+            <div class="stats-item">
+              <span class="stats-label">Total Discussions</span>
+              <span class="stats-value" id="statThreads">0</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-label">Total Comments</span>
+              <span class="stats-value" id="statComments">0</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-label">Active Users</span>
+              <span class="stats-value" id="statUsers">0</span>
+            </div>
+          </div>
+
+          <!-- Popular Tags -->
+          <div class="sidebar-card">
+            <h3><i class="fas fa-tags"></i> Popular Topics</h3>
+            <div class="tags-list">
+              <span class="tag" onclick="filterByTag('earthquake')"
+                >Earthquake</span
+              >
+              <span class="tag" onclick="filterByTag('flood')">Flood</span>
+              <span class="tag" onclick="filterByTag('relief')"
+                >Relief Efforts</span
+              >
+              <span class="tag" onclick="filterByTag('volunteer')"
+                >Volunteering</span
+              >
+              <span class="tag" onclick="filterByTag('updates')">Updates</span>
+              <span class="tag" onclick="filterByTag('help')">Help Needed</span>
+            </div>
+          </div>
+
+          <!-- Forum Guidelines -->
+          <div class="sidebar-card">
+            <h3><i class="fas fa-rules"></i> Guidelines</h3>
+            <ul
+              style="
+                font-size: 0.9rem;
+                color: #666;
+                line-height: 1.8;
+                list-style: none;
+                padding: 0;
+              "
+            >
+              <li>
+                <i class="fas fa-check" style="color: #69cae0"></i> Be
+                respectful
+              </li>
+              <li>
+                <i class="fas fa-check" style="color: #69cae0"></i> Stay on
+                topic
+              </li>
+              <li>
+                <i class="fas fa-check" style="color: #69cae0"></i> Share
+                accurate info
+              </li>
+              <li>
+                <i class="fas fa-check" style="color: #69cae0"></i> Help others
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Thread Modal -->
+    <div class="modal fade" id="newThreadModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-pen-fancy"></i> Start a New Discussion
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="threadAuthor" class="form-label">Your Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="threadAuthor"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="threadTitle" class="form-label"
+                >Discussion Title</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="threadTitle"
+                placeholder="What do you want to discuss?"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="threadCategory" class="form-label">Category</label>
+              <select class="form-control" id="threadCategory">
+                <option value="">Select a category</option>
+                <option value="earthquake">Earthquake</option>
+                <option value="flood">Flood</option>
+                <option value="wildfire">Wildfire</option>
+                <option value="relief">Relief Efforts</option>
+                <option value="volunteer">Volunteering</option>
+                <option value="general">General Discussion</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="threadContent" class="form-label">Your Message</label>
+              <textarea
+                class="form-control"
+                id="threadContent"
+                rows="6"
+                placeholder="Share your thoughts, updates, or ask questions..."
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-submit"
+              onclick="submitNewThread()"
+            >
+              Post Discussion
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 GeoAid - Disaster Relief Platform. All rights reserved.</p>
+      <p>
+        <a href="about_us.html">About Us</a> |
+        <a href="resource.html">Resources</a> |
+        <a href="Donation.html">Support Us</a>
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Local storage for forum data (will be replaced with backend API calls)
+      const STORAGE_KEY = "geoaid_forum_data";
+      let currentThreadId = null;
+
+      // Initialize forum
+      function initForum() {
+        loadThreads();
+        updateStats();
+      }
+
+      // Load threads from storage
+      function loadThreads() {
+        const threads = getThreadsFromStorage();
+        displayThreadsList(threads);
+      }
+
+      // Get threads from localStorage
+      function getThreadsFromStorage() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : { threads: [], nextThreadId: 1 };
+      }
+
+      // Save threads to localStorage
+      function saveThreadsToStorage(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      }
+
+      // Display threads list
+      function displayThreadsList(forumData) {
+        const threadsList = document.getElementById("threadsList");
+        const threads = forumData.threads || [];
+
+        if (threads.length === 0) {
+          threadsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <p>No discussions yet. Be the first to start one!</p>
+                    </div>
+                `;
+          return;
+        }
+
+        // Sort threads by date (newest first)
+        const sortedThreads = [...threads].sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        );
+
+        threadsList.innerHTML = sortedThreads
+          .map(
+            (thread) => `
+                <div class="thread-item" onclick="viewThread(${thread.id})">
+                    <div class="thread-title">${escapeHtml(thread.title)}</div>
+                    <div class="thread-preview">${escapeHtml(thread.content.substring(0, 100))}</div>
+                    <div class="thread-meta">
+                        <span><i class="fas fa-user"></i> ${escapeHtml(thread.author)}</span>
+                        <span><i class="fas fa-comment"></i> ${thread.replies.length} comment${thread.replies.length !== 1 ? "s" : ""}</span>
+                        <span><i class="fas fa-tag"></i> ${escapeHtml(thread.category)}</span>
+                        <span><i class="fas fa-clock"></i> ${formatDate(thread.createdAt)}</span>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      // View thread details
+      function viewThread(threadId) {
+        const forumData = getThreadsFromStorage();
+        const thread = forumData.threads.find((t) => t.id === threadId);
+
+        if (!thread) return;
+
+        currentThreadId = threadId;
+
+        // Update detail view
+        document.getElementById("detailTitle").textContent = thread.title;
+        document.getElementById("detailContent").textContent = thread.content;
+
+        document.getElementById("detailMeta").innerHTML = `
+                <span><i class="fas fa-user"></i> ${escapeHtml(thread.author)} <span class="thread-author-badge">Original Poster</span></span>
+                <span><i class="fas fa-calendar"></i> ${formatDate(thread.createdAt)}</span>
+                <span><i class="fas fa-tag"></i> ${escapeHtml(thread.category)}</span>
+            `;
+
+        // Display comments
+        displayComments(thread.replies);
+
+        // Show detail view, hide threads list
+        document.getElementById("threadsView").style.display = "none";
+        document.getElementById("threadDetailView").classList.add("active");
+      }
+
+      // Display comments for a thread
+      function displayComments(replies) {
+        const commentsList = document.getElementById("commentsList");
+
+        if (replies.length === 0) {
+          commentsList.innerHTML =
+            '<p style="color: #999; text-align: center; padding: 20px;">No comments yet. Be the first to reply!</p>';
+          return;
+        }
+
+        commentsList.innerHTML = replies
+          .map(
+            (reply, index) => `
+                <div class="comment-box">
+                    <div class="comment-header">
+                        <span class="comment-author">${escapeHtml(reply.author)}</span>
+                        <span class="comment-date">${formatDate(reply.createdAt)}</span>
+                    </div>
+                    <div class="comment-content">${escapeHtml(reply.content)}</div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      // Back to threads list
+      function backToThreadsList() {
+        document.getElementById("threadsView").style.display = "block";
+        document.getElementById("threadDetailView").classList.remove("active");
+        clearReply();
+        currentThreadId = null;
+      }
+
+      // Submit new thread
+      function submitNewThread() {
+        const author = document.getElementById("threadAuthor").value.trim();
+        const title = document.getElementById("threadTitle").value.trim();
+        const category = document.getElementById("threadCategory").value;
+        const content = document.getElementById("threadContent").value.trim();
+
+        if (!author || !title || !category || !content) {
+          showError("Please fill in all fields");
+          return;
+        }
+
+        const forumData = getThreadsFromStorage();
+
+        const newThread = {
+          id: forumData.nextThreadId++,
+          title,
+          author,
+          category,
+          content,
+          createdAt: new Date().toISOString(),
+          replies: [],
+        };
+
+        forumData.threads.push(newThread);
+        saveThreadsToStorage(forumData);
+
+        showSuccess("Discussion posted successfully!");
+
+        // Clear form and close modal
+        document.getElementById("threadAuthor").value = "";
+        document.getElementById("threadTitle").value = "";
+        document.getElementById("threadCategory").value = "";
+        document.getElementById("threadContent").value = "";
+
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("newThreadModal"),
+        );
+        modal.hide();
+
+        // Reload threads
+        loadThreads();
+        updateStats();
+      }
+
+      // Submit reply
+      function submitReply() {
+        if (!currentThreadId) return;
+
+        const replyText = document.getElementById("replyInput").value.trim();
+
+        if (!replyText) {
+          showError("Please enter a comment");
+          return;
+        }
+
+        const forumData = getThreadsFromStorage();
+        const thread = forumData.threads.find((t) => t.id === currentThreadId);
+
+        if (!thread) return;
+
+        // Get commenter name (you can enhance this with proper user system)
+        const commenterName =
+          localStorage.getItem("commenterName") || "Anonymous User";
+
+        const newReply = {
+          author: commenterName,
+          content: replyText,
+          createdAt: new Date().toISOString(),
+        };
+
+        thread.replies.push(newReply);
+        saveThreadsToStorage(forumData);
+
+        showSuccess("Comment posted successfully!");
+        clearReply();
+        displayComments(thread.replies);
+        updateStats();
+      }
+
+      // Clear reply input
+      function clearReply() {
+        document.getElementById("replyInput").value = "";
+      }
+
+      // Update forum stats
+      function updateStats() {
+        const forumData = getThreadsFromStorage();
+        const threads = forumData.threads || [];
+
+        let totalComments = 0;
+        const uniqueUsers = new Set();
+
+        threads.forEach((thread) => {
+          uniqueUsers.add(thread.author);
+          totalComments += thread.replies.length;
+          thread.replies.forEach((reply) => uniqueUsers.add(reply.author));
+        });
+
+        document.getElementById("statThreads").textContent = threads.length;
+        document.getElementById("statComments").textContent = totalComments;
+        document.getElementById("statUsers").textContent = uniqueUsers.size;
+      }
+
+      // Filter by tag
+      function filterByTag(tag) {
+        const forumData = getThreadsFromStorage();
+        const filtered = forumData.threads.filter(
+          (t) =>
+            t.category.toLowerCase() === tag.toLowerCase() ||
+            t.content.toLowerCase().includes(tag.toLowerCase()) ||
+            t.title.toLowerCase().includes(tag.toLowerCase()),
+        );
+
+        document.getElementById("threadsList").innerHTML =
+          filtered.length === 0
+            ? '<div class="empty-state"><p>No discussions found for this tag.</p></div>'
+            : filtered
+                .map(
+                  (thread) => `
+                    <div class="thread-item" onclick="viewThread(${thread.id})">
+                        <div class="thread-title">${escapeHtml(thread.title)}</div>
+                        <div class="thread-preview">${escapeHtml(thread.content.substring(0, 100))}</div>
+                        <div class="thread-meta">
+                            <span><i class="fas fa-user"></i> ${escapeHtml(thread.author)}</span>
+                            <span><i class="fas fa-comment"></i> ${thread.replies.length} comment${thread.replies.length !== 1 ? "s" : ""}</span>
+                            <span><i class="fas fa-tag"></i> ${escapeHtml(thread.category)}</span>
+                            <span><i class="fas fa-clock"></i> ${formatDate(thread.createdAt)}</span>
+                        </div>
+                    </div>
+                `,
+                )
+                .join("");
+      }
+
+      // Utility functions
+      function formatDate(isoString) {
+        const date = new Date(isoString);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMins = Math.floor(diffMs / 60000);
+        const diffHours = Math.floor(diffMs / 3600000);
+        const diffDays = Math.floor(diffMs / 86400000);
+
+        if (diffMins < 1) return "Just now";
+        if (diffMins < 60)
+          return `${diffMins} minute${diffMins > 1 ? "s" : ""} ago`;
+        if (diffHours < 24)
+          return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+        if (diffDays < 7)
+          return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+
+        return date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      function showSuccess(message) {
+        const successDiv = document.getElementById("successMessage");
+        successDiv.textContent = message;
+        successDiv.classList.add("show");
+        setTimeout(() => successDiv.classList.remove("show"), 5000);
+      }
+
+      function showError(message) {
+        const errorDiv = document.getElementById("errorMessage");
+        errorDiv.textContent = message;
+        errorDiv.classList.add("show");
+        setTimeout(() => errorDiv.classList.remove("show"), 5000);
+      }
+
+      // Initialize on page load
+      window.addEventListener("load", initForum);
+    </script>
+  </body>
+</html>

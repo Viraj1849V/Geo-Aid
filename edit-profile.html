@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile - GeoAid</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #69cae0;
+        --secondary-color: #f3dc5b;
+        --accent-color: #da935d;
+        --dark-color: #1d1c1c;
+        --light-bg: #f8f9fa;
+      }
+
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+          url("photos_bg/wall1.jpg") no-repeat center center fixed;
+        background-size: cover;
+        color: var(--dark-color);
+      }
+
+      /* Navbar */
+      .navbar {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        ) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand img {
+        height: 50px;
+        width: auto;
+      }
+
+      .nav-link {
+        color: white !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--secondary-color) !important;
+        transform: translateY(-2px);
+      }
+
+      .dropdown-menu {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        border: none;
+      }
+
+      .dropdown-item {
+        color: white;
+      }
+
+      .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: var(--secondary-color);
+      }
+
+      .dropdown-divider {
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* Edit Profile Section */
+      .edit-profile-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      .edit-profile-card {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .edit-profile-card h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 30px;
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 2px solid var(--primary-color);
+      }
+
+      /* Form Group */
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        font-weight: 600;
+        color: var(--dark-color);
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .form-control {
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 12px 15px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(105, 202, 224, 0.1);
+        outline: none;
+      }
+
+      .form-control::placeholder {
+        color: #999;
+      }
+
+      /* Error Messages */
+      .error-text {
+        color: #d63031;
+        font-size: 0.85rem;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .error-text.show {
+        display: block;
+      }
+
+      .form-control.error {
+        border-color: #d63031;
+      }
+
+      /* Success Message */
+      .alert {
+        border-radius: 8px;
+        border: none;
+        margin-bottom: 25px;
+      }
+
+      .alert-success {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      /* Buttons */
+      .btn-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .btn-save {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        border: none;
+        padding: 12px 40px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex: 1;
+      }
+
+      .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        color: white;
+      }
+
+      .btn-cancel {
+        background: #e0e0e0;
+        color: var(--dark-color);
+        border: none;
+        padding: 12px 40px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+      }
+
+      .btn-cancel:hover {
+        background: #d0d0d0;
+        color: var(--dark-color);
+      }
+
+      /* Info Box */
+      .info-box {
+        background: linear-gradient(
+          135deg,
+          rgba(105, 202, 224, 0.1),
+          rgba(218, 147, 93, 0.1)
+        );
+        border-left: 4px solid var(--primary-color);
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+      }
+
+      .info-box p {
+        margin: 0;
+        color: #666;
+        font-size: 0.95rem;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--dark-color);
+        color: white;
+        padding: 40px 0 20px;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: var(--secondary-color);
+      }
+
+      .not-logged-in {
+        background: white;
+        border-radius: 15px;
+        padding: 60px 40px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .not-logged-in h2 {
+        color: var(--dark-color);
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+      }
+
+      .not-logged-in p {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+      }
+
+      .btn-login {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .edit-profile-card {
+          padding: 25px;
+        }
+
+        .btn-group {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="home.html">
+          <img src="photos_bg/logo.png" alt="GeoAid Logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html"
+                ><i class="fas fa-home me-1"></i> Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about_us.html"
+                ><i class="fas fa-info-circle me-1"></i> About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="forum.html"
+                ><i class="fas fa-comments me-1"></i> Forum</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="profileDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-user-circle me-1"></i>
+                <span id="userName">Profile</span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                <li>
+                  <a class="dropdown-item" href="profile.html"
+                    ><i class="fas fa-user me-2"></i>View Profile</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="edit-profile.html"
+                    ><i class="fas fa-edit me-2"></i>Edit Profile</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" onclick="logout()"
+                    ><i class="fas fa-sign-out-alt me-2"></i>Logout</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Edit Profile Content -->
+    <div class="edit-profile-container" id="editProfileContent">
+      <div class="edit-profile-card">
+        <h1><i class="fas fa-edit me-2"></i>Edit Profile</h1>
+
+        <div id="messageAlert" style="display: none"></div>
+
+        <div class="info-box">
+          <p>
+            <i class="fas fa-info-circle me-2"></i>Update your profile
+            information below. Your email and username cannot be changed.
+          </p>
+        </div>
+
+        <form id="editProfileForm" onsubmit="handleSaveProfile(event)">
+          <!-- Full Name -->
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fullName"
+              name="fullName"
+              required
+            />
+            <div class="error-text" id="fullNameError"></div>
+          </div>
+
+          <!-- Email (Read-only) -->
+          <div class="form-group">
+            <label for="email">Email Address (Cannot be changed)</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              readonly
+              style="background: #f5f5f5; color: #999"
+            />
+          </div>
+
+          <!-- Username (Read-only) -->
+          <div class="form-group">
+            <label for="username">Username (Cannot be changed)</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              readonly
+              style="background: #f5f5f5; color: #999"
+            />
+          </div>
+
+          <!-- Change Password -->
+          <div class="form-group">
+            <label for="currentPassword"
+              >Current Password (To confirm changes)</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="currentPassword"
+              name="currentPassword"
+              placeholder="Enter your password to confirm"
+              required
+            />
+            <div class="error-text" id="currentPasswordError"></div>
+          </div>
+
+          <!-- Bio (Optional) -->
+          <div class="form-group">
+            <label for="bio">Bio (Optional)</label>
+            <textarea
+              class="form-control"
+              id="bio"
+              name="bio"
+              rows="4"
+              placeholder="Tell us about yourself..."
+              style="resize: vertical"
+            ></textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="btn-group">
+            <button type="submit" class="btn-save">
+              <i class="fas fa-save me-2"></i>Save Changes
+            </button>
+            <a href="profile.html" class="btn-cancel">
+              <i class="fas fa-times me-2"></i>Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Not Logged In Content -->
+    <div
+      class="edit-profile-container"
+      id="notLoggedInContent"
+      style="display: none"
+    >
+      <div class="not-logged-in">
+        <i
+          class="fas fa-lock"
+          style="
+            font-size: 60px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: block;
+          "
+        ></i>
+        <h2>Access Denied</h2>
+        <p>You need to be logged in to edit your profile.</p>
+        <a href="login.html" class="btn-login">Go to Login</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>GeoAid</h5>
+            <p>
+              Supporting communities in times of crisis through coordinated
+              relief efforts.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="about_us.html">About Us</a></li>
+              <li><a href="Donation.html">Donation</a></li>
+              <li><a href="volunteering.html">Volunteering</a></li>
+              <li><a href="resource.html">Resources</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <p>&copy; 2025 GeoAid. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const isLoggedIn = localStorage.getItem("geoaid_logged_in") === "true";
+        const userData = localStorage.getItem("geoaid_user");
+
+        if (!isLoggedIn || !userData) {
+          // Not logged in - show not logged in message
+          document.getElementById("editProfileContent").style.display = "none";
+          document.getElementById("notLoggedInContent").style.display = "block";
+          return;
+        }
+
+        // User is logged in - populate profile data
+        const user = JSON.parse(userData);
+        const username = localStorage.getItem("geoaid_current_user");
+
+        // Update navbar
+        document.getElementById("userName").textContent = username;
+
+        // Populate form fields
+        document.getElementById("fullName").value = user.fullName || "";
+        document.getElementById("email").value = user.email || "";
+        document.getElementById("username").value = username || "";
+        document.getElementById("bio").value = user.bio || "";
+      });
+
+      function handleSaveProfile(event) {
+        event.preventDefault();
+
+        const fullName = document.getElementById("fullName").value.trim();
+        const currentPassword =
+          document.getElementById("currentPassword").value;
+        const bio = document.getElementById("bio").value.trim();
+        const messageAlert = document.getElementById("messageAlert");
+
+        // Clear errors
+        document
+          .querySelectorAll(".error-text")
+          .forEach((el) => el.classList.remove("show"));
+        document
+          .querySelectorAll(".form-control")
+          .forEach((el) => el.classList.remove("error"));
+
+        let isValid = true;
+
+        // Validate full name
+        if (fullName.length < 2) {
+          showError("fullNameError", "Full name must be at least 2 characters");
+          isValid = false;
+        }
+
+        // Validate password
+        const userData = JSON.parse(localStorage.getItem("geoaid_user"));
+        if (currentPassword !== userData.password) {
+          showError("currentPasswordError", "Incorrect password");
+          isValid = false;
+        }
+
+        if (isValid) {
+          // Update user data
+          const updatedUser = {
+            ...userData,
+            fullName: fullName,
+            bio: bio,
+          };
+          localStorage.setItem("geoaid_user", JSON.stringify(updatedUser));
+
+          // Show success message
+          messageAlert.className = "alert alert-success";
+          messageAlert.innerHTML =
+            '<i class="fas fa-check-circle me-2"></i>Profile updated successfully!';
+          messageAlert.style.display = "block";
+
+          // Clear password field
+          document.getElementById("currentPassword").value = "";
+
+          // Redirect after 2 seconds
+          setTimeout(() => {
+            window.location.href = "profile.html";
+          }, 2000);
+        }
+      }
+
+      function showError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.classList.add("show");
+
+        const inputId = elementId.replace("Error", "");
+        const inputElement = document.getElementById(inputId);
+        if (inputElement) {
+          inputElement.classList.add("error");
+        }
+      }
+
+      function logout() {
+        event.preventDefault();
+        localStorage.removeItem("geoaid_logged_in");
+        localStorage.removeItem("geoaid_current_user");
+        window.location.href = "home.html";
+      }
+    </script>
+  </body>
+</html>

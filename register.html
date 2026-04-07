@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - GeoAid</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #69cae0 0%, #da935d 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: linear-gradient(135deg, #69cae0, #da935d) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: white !important;
+      }
+
+      .nav-link {
+        color: white !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #f3dc5b !important;
+        transform: translateY(-2px);
+      }
+
+      /* Animated Bubbles */
+      .bubble {
+        position: fixed;
+        bottom: -50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 20s infinite ease-in-out;
+        z-index: 1;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) translateX(0px);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translateY(-100px) translateX(50px);
+          opacity: 0.6;
+        }
+      }
+
+      /* Flash Messages */
+      .flashes {
+        position: fixed;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2000;
+        width: 90%;
+        max-width: 500px;
+      }
+
+      .flash {
+        padding: 15px 20px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        font-weight: 500;
+        animation: slideDown 0.3s ease-out;
+      }
+
+      .flash.success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .flash.error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .flash.info {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateX(-50%) translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(-50%) translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideOut {
+        to {
+          transform: translateX(-50%) translateY(-20px);
+          opacity: 0;
+        }
+      }
+
+      /* Container */
+      .register-wrapper {
+        width: 100%;
+        max-width: 450px;
+        padding: 20px;
+        margin-top: 70px;
+        z-index: 10;
+        position: relative;
+      }
+
+      .register-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        padding: 50px 30px;
+        animation: slideUp 0.5s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Header */
+      .register-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .register-header h1 {
+        font-size: 2rem;
+        color: #20576e;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .register-header p {
+        color: #999;
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      /* Form Group */
+      .input-group {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .input-group input,
+      .input-group select {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 0.95rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-family: "Poppins", sans-serif;
+        transition: all 0.3s ease;
+        background: #f9f9f9;
+      }
+
+      .input-group input:focus,
+      .input-group select:focus {
+        outline: none;
+        border-color: #69cae0;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(105, 202, 224, 0.1);
+      }
+
+      .input-group label {
+        position: absolute;
+        top: 12px;
+        left: 15px;
+        font-size: 0.95rem;
+        color: #999;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .input-group input:focus ~ label,
+      .input-group input:valid ~ label,
+      .input-group select:focus ~ label {
+        top: -10px;
+        left: 10px;
+        font-size: 0.8rem;
+        color: #69cae0;
+        background: white;
+        padding: 0 5px;
+      }
+
+      .input-group input:focus,
+      .input-group input:valid {
+        padding-top: 18px;
+        padding-bottom: 6px;
+      }
+
+      /* Password Requirements */
+      .password-requirements {
+        font-size: 0.8rem;
+        color: #999;
+        margin-top: 5px;
+        padding-left: 15px;
+        display: none;
+        list-style: none;
+      }
+
+      .password-requirements.show {
+        display: block;
+      }
+
+      .password-requirements li {
+        margin: 3px 0;
+      }
+
+      .password-requirements li.valid {
+        color: #4caf50;
+      }
+
+      .password-requirements li.invalid {
+        color: #d32f2f;
+      }
+
+      /* Button */
+      .btn-register {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #69cae0, #da935d);
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .btn-register:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(105, 202, 224, 0.4);
+      }
+
+      .btn-register:active {
+        transform: translateY(0);
+      }
+
+      .btn-register:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      /* Footer */
+      .register-footer {
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      .register-footer p {
+        color: #666;
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .register-footer a {
+        color: #69cae0;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .register-footer a:hover {
+        color: #da935d;
+        text-decoration: underline;
+      }
+
+      /* Error Message */
+      .error-text {
+        color: #d32f2f;
+        font-size: 0.8rem;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .error-text.show {
+        display: block;
+      }
+
+      .input-group input.error {
+        border-color: #d32f2f;
+      }
+
+      /* Success Message */
+      .success-container {
+        text-align: center;
+        padding: 40px 20px;
+        display: none;
+      }
+
+      .success-container.show {
+        display: block;
+      }
+
+      .success-icon {
+        font-size: 3rem;
+        color: #4caf50;
+        margin-bottom: 15px;
+      }
+
+      .success-container h2 {
+        color: #20576e;
+        margin-bottom: 10px;
+      }
+
+      .success-container p {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .btn-login {
+        background: linear-gradient(135deg, #69cae0, #da935d);
+        color: white;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(105, 202, 224, 0.4);
+        color: white;
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        .register-container {
+          padding: 40px 20px;
+        }
+
+        .register-header h1 {
+          font-size: 1.5rem;
+        }
+
+        .register-wrapper {
+          padding: 10px;
+        }
+      }
+
+      /* Login Link */
+      .login-link {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      .login-link a {
+        color: #69cae0;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .login-link a:hover {
+        color: #da935d;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="home.html">
+          <i class="fas fa-globe"></i> GeoAid
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html"
+                ><i class="fas fa-home me-1"></i> Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about_us.html"
+                ><i class="fas fa-info-circle me-1"></i> About</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="resource.html"
+                ><i class="fas fa-cubes me-1"></i> Resources</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="live_news.html"
+                ><i class="fas fa-newspaper me-1"></i> Live News</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="forum.html"
+                ><i class="fas fa-comments me-1"></i> Forum</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html"
+                ><i class="fas fa-sign-in-alt me-1"></i> Login</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Animated Bubbles -->
+    <div class="bubble" style="width: 100px; height: 100px; left: 10%"></div>
+    <div
+      class="bubble"
+      style="
+        width: 150px;
+        height: 150px;
+        right: 10%;
+        animation-duration: 25s;
+        animation-delay: 5s;
+      "
+    ></div>
+    <div
+      class="bubble"
+      style="
+        width: 70px;
+        height: 70px;
+        left: 50%;
+        animation-duration: 18s;
+        animation-delay: 10s;
+      "
+    ></div>
+    <div
+      class="bubble"
+      style="
+        width: 120px;
+        height: 120px;
+        right: 30%;
+        animation-duration: 22s;
+        animation-delay: 15s;
+      "
+    ></div>
+
+    <!-- Flash Messages -->
+    <div class="flashes" id="flashContainer"></div>
+
+    <!-- Register Wrapper -->
+    <div class="register-wrapper">
+      <!-- Register Form -->
+      <div class="register-container" id="registerForm">
+        <div class="register-header">
+          <h1>Create Account</h1>
+          <p>Join GeoAid and help make a difference</p>
+        </div>
+
+        <form id="registrationForm" onsubmit="handleSubmit(event)">
+          <!-- Full Name -->
+          <div class="input-group">
+            <input type="text" id="fullName" name="fullName" required />
+            <label for="fullName">Full Name</label>
+            <div class="error-text" id="fullNameError"></div>
+          </div>
+
+          <!-- Email -->
+          <div class="input-group">
+            <input type="email" id="email" name="email" required />
+            <label for="email">Email Address</label>
+            <div class="error-text" id="emailError"></div>
+          </div>
+
+          <!-- Username -->
+          <div class="input-group">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              minlength="4"
+            />
+            <label for="username">Username (min 4 characters)</label>
+            <div class="error-text" id="usernameError"></div>
+          </div>
+
+          <!-- Password -->
+          <div class="input-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              minlength="6"
+              onchange="updatePasswordRequirements()"
+              oninput="updatePasswordRequirements()"
+            />
+            <label for="password">Password (min 6 characters)</label>
+            <ul class="password-requirements" id="passwordReqs">
+              <li id="lengthReq">
+                <i class="fas fa-circle"></i> At least 6 characters
+              </li>
+              <li id="upperReq">
+                <i class="fas fa-circle"></i> One uppercase letter
+              </li>
+              <li id="numberReq"><i class="fas fa-circle"></i> One number</li>
+              <li id="specialReq">
+                <i class="fas fa-circle"></i> One special character
+              </li>
+            </ul>
+            <div class="error-text" id="passwordError"></div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="input-group">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              minlength="6"
+              oninput="validatePasswordMatch()"
+            />
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="error-text" id="confirmPasswordError"></div>
+          </div>
+
+          <!-- Terms & Conditions -->
+          <div
+            class="input-group"
+            style="display: flex; align-items: center; margin-bottom: 20px"
+          >
+            <input
+              type="checkbox"
+              id="terms"
+              name="terms"
+              required
+              style="width: auto; margin: 0; margin-right: 10px"
+            />
+            <label
+              for="terms"
+              style="position: static; color: #666; font-size: 0.9rem"
+            >
+              I agree to the
+              <a href="#" style="color: #69cae0">Terms and Conditions</a>
+            </label>
+          </div>
+
+          <!-- Register Button -->
+          <button type="submit" class="btn-register">
+            <i class="fas fa-user-plus"></i> Create Account
+          </button>
+        </form>
+
+        <!-- Footer -->
+        <div class="register-footer">
+          <p>Already have an account? <a href="login.html">Login here</a></p>
+          <p style="margin-top: 10px; font-size: 0.85rem; color: #999">
+            <a href="home.html" style="color: #69cae0">Back to Home</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Success Message -->
+      <div class="register-container success-container" id="successContainer">
+        <div class="success-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h2>Registration Successful!</h2>
+        <p>Welcome to GeoAid! Your account has been created.</p>
+        <p style="font-size: 0.9rem; color: #999">
+          Redirecting to login page...
+        </p>
+        <button
+          type="button"
+          class="btn-login"
+          onclick="window.location.href = 'login.html'"
+        >
+          Go to Login
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Password requirements
+      function updatePasswordRequirements() {
+        const password = document.getElementById("password").value;
+
+        const reqs = {
+          lengthReq: password.length >= 6,
+          upperReq: /[A-Z]/.test(password),
+          numberReq: /[0-9]/.test(password),
+          specialReq: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+        };
+
+        const reqsContainer = document.getElementById("passwordReqs");
+        if (password.length > 0) {
+          reqsContainer.classList.add("show");
+        } else {
+          reqsContainer.classList.remove("show");
+        }
+
+        for (const [key, valid] of Object.entries(reqs)) {
+          const element = document.getElementById(key);
+          if (valid) {
+            element.classList.add("valid");
+            element.classList.remove("invalid");
+          } else {
+            element.classList.add("invalid");
+            element.classList.remove("valid");
+          }
+        }
+      }
+
+      // Validate password match
+      function validatePasswordMatch() {
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+        const errorElement = document.getElementById("confirmPasswordError");
+
+        if (confirmPassword && password !== confirmPassword) {
+          errorElement.textContent = "Passwords don't match";
+          errorElement.classList.add("show");
+          document.getElementById("confirmPassword").classList.add("error");
+        } else {
+          errorElement.classList.remove("show");
+          document.getElementById("confirmPassword").classList.remove("error");
+        }
+      }
+
+      // Handle form submission
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        // Validate form
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+        const terms = document.getElementById("terms").checked;
+
+        let isValid = true;
+
+        // Clear previous errors
+        document
+          .querySelectorAll(".error-text")
+          .forEach((el) => el.classList.remove("show"));
+        document
+          .querySelectorAll("input")
+          .forEach((el) => el.classList.remove("error"));
+
+        // Validate full name
+        if (fullName.length < 2) {
+          showError("fullNameError", "Please enter a valid name");
+          isValid = false;
+        }
+
+        // Validate email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showError("emailError", "Please enter a valid email");
+          isValid = false;
+        }
+
+        // Validate username
+        if (username.length < 4) {
+          showError("usernameError", "Username must be at least 4 characters");
+          isValid = false;
+        }
+
+        // Validate password
+        if (password.length < 6) {
+          showError("passwordError", "Password must be at least 6 characters");
+          isValid = false;
+        }
+
+        // Validate password match
+        if (password !== confirmPassword) {
+          showError("confirmPasswordError", "Passwords don't match");
+          isValid = false;
+        }
+
+        // Validate terms
+        if (!terms) {
+          showFlash("Please agree to the terms and conditions", "error");
+          isValid = false;
+        }
+
+        if (isValid) {
+          // Show success message
+          document.getElementById("registerForm").style.display = "none";
+          document.getElementById("successContainer").classList.add("show");
+
+          // Store user data (in real app, send to backend)
+          const userData = { fullName, email, username, password };
+          localStorage.setItem("geoaid_user", JSON.stringify(userData));
+
+          // Redirect after 3 seconds
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 3000);
+        }
+      }
+
+      // Show error message
+      function showError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.classList.add("show");
+
+        // Add error class to input
+        const inputId = elementId.replace("Error", "");
+        const inputElement = document.getElementById(inputId);
+        if (inputElement) {
+          inputElement.classList.add("error");
+        }
+      }
+
+      // Show flash message
+      function showFlash(message, type = "info") {
+        const flashContainer = document.getElementById("flashContainer");
+        const flash = document.createElement("div");
+        flash.className = `flash ${type}`;
+        flash.innerHTML = `<i class="fas fa-${type === "error" ? "exclamation-circle" : "info-circle"}"></i> ${message}`;
+
+        flashContainer.appendChild(flash);
+
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+          flash.style.animation = "slideOut 0.3s ease-out forwards";
+          setTimeout(() => flash.remove(), 300);
+        }, 5000);
+      }
+
+      // Real-time validation
+      document.getElementById("email").addEventListener("change", function () {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+          showError("emailError", "Please enter a valid email");
+        } else {
+          document.getElementById("emailError").classList.remove("show");
+          this.classList.remove("error");
+        }
+      });
+
+      document
+        .getElementById("username")
+        .addEventListener("change", function () {
+          if (this.value.length < 4) {
+            showError(
+              "usernameError",
+              "Username must be at least 4 characters",
+            );
+          } else {
+            document.getElementById("usernameError").classList.remove("show");
+            this.classList.remove("error");
+          }
+        });
+    </script>
+  </body>
+</html>

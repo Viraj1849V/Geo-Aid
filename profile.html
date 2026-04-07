@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - GeoAid</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #69cae0;
+        --secondary-color: #f3dc5b;
+        --accent-color: #da935d;
+        --dark-color: #1d1c1c;
+        --light-bg: #f8f9fa;
+      }
+
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+          url("photos_bg/wall1.jpg") no-repeat center center fixed;
+        background-size: cover;
+        color: var(--dark-color);
+      }
+
+      /* Navbar */
+      .navbar {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        ) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand img {
+        height: 50px;
+        width: auto;
+      }
+
+      .nav-link {
+        color: white !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--secondary-color) !important;
+        transform: translateY(-2px);
+      }
+
+      .dropdown-menu {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        border: none;
+      }
+
+      .dropdown-item {
+        color: white;
+      }
+
+      .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: var(--secondary-color);
+      }
+
+      .dropdown-divider {
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* Profile Section */
+      .profile-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      .profile-header {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .profile-avatar {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 50px;
+        color: white;
+        margin: 0 auto 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .profile-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 10px;
+      }
+
+      .profile-header p {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+      }
+
+      /* Profile Info Cards */
+      .info-section {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .info-section h2 {
+        font-size: 1.5rem;
+        color: var(--dark-color);
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--primary-color);
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+        align-items: center;
+      }
+
+      .info-row:last-child {
+        border-bottom: none;
+      }
+
+      .info-label {
+        font-weight: 600;
+        color: var(--dark-color);
+        flex: 1;
+      }
+
+      .info-value {
+        color: #666;
+        flex: 2;
+        text-align: right;
+      }
+
+      /* Buttons */
+      .btn-edit {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      .btn-edit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        color: white;
+      }
+
+      .btn-logout {
+        background: #d63031;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-logout:hover {
+        background: #c92a2a;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(214, 48, 49, 0.3);
+        color: white;
+      }
+
+      .action-buttons {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--dark-color);
+        color: white;
+        padding: 40px 0 20px;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: var(--secondary-color);
+      }
+
+      .not-logged-in {
+        background: white;
+        border-radius: 15px;
+        padding: 60px 40px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .not-logged-in h2 {
+        color: var(--dark-color);
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+      }
+
+      .not-logged-in p {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+      }
+
+      .btn-login {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .profile-header {
+          padding: 30px 20px;
+        }
+
+        .info-row {
+          flex-direction: column;
+          text-align: left;
+        }
+
+        .info-value {
+          text-align: left;
+          margin-top: 5px;
+        }
+
+        .action-buttons {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .btn-edit,
+        .btn-logout {
+          width: 100%;
+          margin-right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="home.html">
+          <img src="photos_bg/logo.png" alt="GeoAid Logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html"
+                ><i class="fas fa-home me-1"></i> Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about_us.html"
+                ><i class="fas fa-info-circle me-1"></i> About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="forum.html"
+                ><i class="fas fa-comments me-1"></i> Forum</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="profileDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-user-circle me-1"></i>
+                <span id="userName">Profile</span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                <li>
+                  <a class="dropdown-item" href="profile.html"
+                    ><i class="fas fa-user me-2"></i>View Profile</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="edit-profile.html"
+                    ><i class="fas fa-edit me-2"></i>Edit Profile</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" onclick="logout()"
+                    ><i class="fas fa-sign-out-alt me-2"></i>Logout</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <div class="profile-container" id="profileContent">
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <h1 id="profileName">User Name</h1>
+        <p id="profileEmail">user@example.com</p>
+        <p
+          id="profileStatus"
+          style="color: var(--primary-color); font-weight: 600"
+        >
+          Member since <span id="joinDate">2026</span>
+        </p>
+      </div>
+
+      <div class="info-section">
+        <h2><i class="fas fa-info-circle me-2"></i>Personal Information</h2>
+        <div class="info-row">
+          <span class="info-label">Full Name</span>
+          <span class="info-value" id="infoFullName">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Email Address</span>
+          <span class="info-value" id="infoEmail">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Username</span>
+          <span class="info-value" id="infoUsername">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Account Type</span>
+          <span class="info-value">Individual</span>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h2><i class="fas fa-history me-2"></i>Activity</h2>
+        <div class="info-row">
+          <span class="info-label">Member Since</span>
+          <span class="info-value" id="memberSince">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Last Login</span>
+          <span class="info-value" id="lastLogin">Today</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Account Status</span>
+          <span class="info-value"
+            ><span style="color: #4caf50; font-weight: 600"
+              ><i class="fas fa-check-circle me-1"></i>Active</span
+            ></span
+          >
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <a href="edit-profile.html" class="btn-edit"
+          ><i class="fas fa-edit me-2"></i>Edit Profile</a
+        >
+        <a href="#" onclick="logout()" class="btn-logout"
+          ><i class="fas fa-sign-out-alt me-2"></i>Logout</a
+        >
+      </div>
+    </div>
+
+    <!-- Not Logged In Content -->
+    <div
+      class="profile-container"
+      id="notLoggedInContent"
+      style="display: none"
+    >
+      <div class="not-logged-in">
+        <i
+          class="fas fa-lock"
+          style="
+            font-size: 60px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: block;
+          "
+        ></i>
+        <h2>Access Denied</h2>
+        <p>You need to be logged in to view your profile.</p>
+        <a href="login.html" class="btn-login">Go to Login</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>GeoAid</h5>
+            <p>
+              Supporting communities in times of crisis through coordinated
+              relief efforts.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="about_us.html">About Us</a></li>
+              <li><a href="Donation.html">Donation</a></li>
+              <li><a href="volunteering.html">Volunteering</a></li>
+              <li><a href="resource.html">Resources</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <p>&copy; 2025 GeoAid. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const isLoggedIn = localStorage.getItem("geoaid_logged_in") === "true";
+        const userData = localStorage.getItem("geoaid_user");
+
+        if (!isLoggedIn || !userData) {
+          // Not logged in - show not logged in message
+          document.getElementById("profileContent").style.display = "none";
+          document.getElementById("notLoggedInContent").style.display = "block";
+          return;
+        }
+
+        // User is logged in - populate profile data
+        const user = JSON.parse(userData);
+        const username = localStorage.getItem("geoaid_current_user");
+
+        // Update header
+        document.getElementById("profileName").textContent =
+          user.fullName || username;
+        document.getElementById("profileEmail").textContent =
+          user.email || "user@example.com";
+        document.getElementById("userName").textContent = username;
+
+        // Update info section
+        document.getElementById("infoFullName").textContent =
+          user.fullName || "-";
+        document.getElementById("infoEmail").textContent = user.email || "-";
+        document.getElementById("infoUsername").textContent = username || "-";
+
+        // Set dates
+        const today = new Date();
+        const dateStr = today.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        document.getElementById("joinDate").textContent = today.getFullYear();
+        document.getElementById("memberSince").textContent = dateStr;
+      });
+
+      function logout() {
+        event.preventDefault();
+        localStorage.removeItem("geoaid_logged_in");
+        localStorage.removeItem("geoaid_current_user");
+        window.location.href = "home.html";
+      }
+    </script>
+  </body>
+</html>
