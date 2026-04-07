@@ -121,18 +121,18 @@ python app2.py
 
 ---
 
-**## Deployment**
+## Deployment
 
 The project is deployed using Render (Flask + Gunicorn).
 
-**## Limitations (Current)**
+## Limitations (Current)
 
 Uses prototype-level data in some modules
 Limited real-time API integration
 No full-scale database yet
 Designed as MVP (Minimum Viable Product)
 
-**## Authors**
+## Authors
 
 Viraj Pathare
 Ayush Chandwadkar
