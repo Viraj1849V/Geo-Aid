@@ -1,8 +1,8 @@
-/* Global Styling */
+﻿/* Global Styling */
 body {
   background:
     linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-    url("photos_bg/wall1.jpg") no-repeat center center fixed;
+    url("/static/photos_bg/wall1.jpg") no-repeat center center fixed;
   min-height: 100vh;
   background-size: cover;
   font-family: Arial, sans-serif;
@@ -60,3 +60,4 @@ body {
   max-width: 300px;
   border-radius: 10px;
 }
+

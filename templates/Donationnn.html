@@ -14,7 +14,7 @@
                 rgba(255, 255, 255, 0.85),
                 rgba(255, 255, 255, 0.85)
             ),
-            url('photos_bg/wall1.jpg') no-repeat center center fixed;
+            url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}") no-repeat center center fixed;
             background-size: cover;
             margin: 0;
             padding: 0;
@@ -291,7 +291,7 @@
      <nav class="navbar navbar-expand-lg custom-navbar">
         <div class="container-fluid d-flex justify-content-between">
             <a class="navbar-brand geo-aid-logo" href="#">
-                <a href="home.html"><img src="photos_bg/logo.png" alt="GeoAid Logo" style="height: 60px; width: auto;">
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='photos_bg/logo.png') }}" alt="GeoAid Logo" style="height: 60px; width: auto;">
               </a>
               
 
@@ -300,15 +300,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="donation.html">Donation</a></li>
-                    <li class="nav-item"><a class="nav-link" href="volunteering.html">Volunteering</a></li>
-                    <li class="nav-item"><a class="nav-link" href="live_news.html">Live Updates</a></li>
-                    <li class="nav-item"><a class="nav-link" href="resource.html">Resource Allocation</a></li>
-                    <li class="nav-item"><a class="nav-link" href="forum.html">Forum</a></li>
-                    <li class="nav-item"><a class="nav-link" href="guidelines.html">Survival Instructions</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about_us.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('donation') }}">Donation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('volunteering') }}">Volunteering</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('live_news') }}">Live Updates</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('resource') }}">Resource Allocation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('forum') }}">Forum</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('guidelines') }}">Survival Instructions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
                 </ul>
             </div>
         </div>
@@ -316,9 +316,9 @@
 
     <!-- Slideshow -->
     <div class="slideshow-container">
-        <img class="slides" src="photos_bg/donateslid1.jpg">
-        <img class="slides" src="photos_bg/donateslide2.jpeg">
-        <img class="slides" src="photos_bg/donationslide3.jpg">
+        <img class="slides" src="{{ url_for('static', filename='photos_bg/donateslid1.jpg') }}">
+        <img class="slides" src="{{ url_for('static', filename='photos_bg/donateslide2.jpeg') }}">
+        <img class="slides" src="{{ url_for('static', filename='photos_bg/donationslide3.jpg') }}">
     </div>
 
     <!-- Why Donate Section -->
@@ -389,7 +389,7 @@
         </div>
         <div class="qr">
         <h6 class="text-center mt-3 fw-bold">Or Donate by QR</h6>
-        <img src="photos_bg/paymentQr.jpg" alt="QR Code" class="qr-code">
+        <img src="{{ url_for('static', filename='photos_bg/paymentQR.jpeg') }}" alt="QR Code" class="qr-code">
         <button class="btn btn-donate mt-3">Donate Now</button>
     </div>
 </div>
@@ -406,7 +406,7 @@
 
     <!-- Donate Goods Form -->
     <div class="donate-goods">
-        <img src="photos_bg/don3.jpg" alt="Donate Goods" class="donate-goods-img">
+        <img src="{{ url_for('static', filename='photos_bg/don3.jpg') }}" alt="Donate Goods" class="donate-goods-img">
         <br>
         <br>
         <h3>Would You Like to Donate Goods?</h3>
@@ -422,7 +422,7 @@
     <div class="donate-video">
         <h3>🎥 Watch How Your Donations Make an Impact</h3>
     <video controls>
-        <source src="photos_bg/invideo-ai-480 Join Hands to Rebuild Lives! 2025-03-31 (1) (online-video-cutter.com).mp4" type="video/mp4">
+        <source src="{{ url_for('static', filename='photos_bg/invideo-ai-480 Join Hands to Rebuild Lives! 2025-03-31 (1) (online-video-cutter.com).mp4') }}" type="video/mp4">
     </video>
     </div>
 

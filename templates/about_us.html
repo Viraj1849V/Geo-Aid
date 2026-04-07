@@ -24,7 +24,7 @@
         overflow-x: hidden;
         background:
           linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-          url("photos_bg/wall1.jpg") no-repeat center center fixed;
+          url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}") no-repeat center center fixed;
         background-size: cover;
         perspective: 1000px;
       }
@@ -1036,9 +1036,9 @@
   <body>
     <nav class="navbar navbar-expand-lg custom-navbar">
       <div class="container-fluid d-flex justify-content-between">
-        <a class="navbar-brand geo-aid-logo" href="home.html">
+        <a class="navbar-brand geo-aid-logo" href="{{ url_for('home') }}">
           <img
-            src="photos_bg/logo.png"
+            src="{{ url_for('static', filename='photos_bg/logo.png') }}"
             alt="GeoAid Logo"
             style="height: 60px; width: auto"
           />
@@ -1058,33 +1058,33 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="home.html">Home</a>
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="donation.html">Donation</a>
+              <a class="nav-link" href="{{ url_for('donation') }}">Donation</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="volunteering.html">Volunteering</a>
+              <a class="nav-link" href="{{ url_for('volunteering') }}">Volunteering</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="live_news.html">Live Updates</a>
+              <a class="nav-link" href="{{ url_for('live_news') }}">Live Updates</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="resource.html">Resource Allocation</a>
+              <a class="nav-link" href="{{ url_for('resource') }}">Resource Allocation</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="forum.html">Forum</a>
+              <a class="nav-link" href="{{ url_for('forum') }}">Forum</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="guidelines.html"
+              <a class="nav-link" href="{{ url_for('guidelines') }}"
                 >Survival Instructions</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about_us.html">About Us</a>
+              <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html">Login</a>
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             </li>
           </ul>
         </div>
@@ -1362,7 +1362,7 @@
         <div class="team-grid">
           <div class="team-member">
             <div class="member-image-container">
-              <img src="./photos_bg/viraj.png" alt="CEO Portrait" />
+              <img src="{{ url_for('static', filename='photos_bg/viraj.png') }}" alt="CEO Portrait" />
             </div>
             <h3>Viraj Pathare</h3>
             <p class="role">CEO</p>
@@ -1375,7 +1375,7 @@
           </div>
           <div class="team-member">
             <div class="member-image-container">
-              <img src="./photos_bg/aryan.png" alt="CEO Portrait" />
+              <img src="{{ url_for('static', filename='photos_bg/aryan.png') }}" alt="CEO Portrait" />
             </div>
             <h3>Aryan Patel</h3>
             <p class="role">CEO</p>
@@ -1389,7 +1389,7 @@
           </div>
           <div class="team-member">
             <div class="member-image-container">
-              <img src="./photos_bg/ayush.png" alt="CEO Portrait" />
+              <img src="{{ url_for('static', filename='photos_bg/ayush.png') }}" alt="CEO Portrait" />
             </div>
             <h3>Ayush Chandwadkar</h3>
             <p class="role">CEO</p>
@@ -1402,7 +1402,7 @@
           </div>
           <div class="team-member">
             <div class="member-image-container">
-              <img src="./photos_bg/heet.png" alt="MENTOR Portrait" />
+              <img src="{{ url_for('static', filename='photos_bg/heet.png') }}" alt="MENTOR Portrait" />
             </div>
             <h3>Heet Oswal</h3>
             <p class="role">CEO</p>

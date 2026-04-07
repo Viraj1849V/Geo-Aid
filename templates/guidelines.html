@@ -21,7 +21,7 @@
 
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: url("photos_bg/wall1.jpg") no-repeat center center fixed;
+        background: url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}") no-repeat center center fixed;
         background-size: cover;
         color: #1d1c1c;
         padding-top: 70px;
@@ -64,7 +64,7 @@
             rgba(32, 87, 110, 0.8),
             rgba(218, 147, 93, 0.8)
           ),
-          url("photos_bg/wall1.jpg");
+          url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}");
         background-size: cover;
         background-position: center;
         height: 300px;
@@ -316,7 +316,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg custom-navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"
+        <a class="navbar-brand" href="{{ url_for('home') }}"
           ><i class="fas fa-shield-alt"></i> GeoAid</a
         >
         <button
@@ -330,13 +330,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="live_news.html">Live Updates</a>
+              <a class="nav-link" href="{{ url_for('live_news') }}">Live Updates</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="guidelines.html">Guidelines</a>
+              <a class="nav-link active" href="{{ url_for('guidelines') }}">Guidelines</a>
             </li>
           </ul>
         </div>

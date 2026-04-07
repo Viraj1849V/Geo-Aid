@@ -27,7 +27,7 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background:
           linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-          url("photos_bg/wall1.jpg") no-repeat center center fixed;
+          url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}") no-repeat center center fixed;
         background-size: cover;
         color: #1d1c1c;
         padding-top: 70px;
@@ -71,7 +71,7 @@
             rgba(105, 202, 224, 0.8),
             rgba(218, 147, 93, 0.8)
           ),
-          url("photos_bg/wall1.jpg");
+          url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}");
         background-size: cover;
         background-position: center;
         height: 300px;
@@ -512,7 +512,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg custom-navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="home.html">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
           <i class="fas fa-globe"></i> GeoAid
         </a>
         <button
@@ -526,37 +526,37 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="home.html"
+              <a class="nav-link" href="{{ url_for('home') }}"
                 ><i class="fas fa-home me-1"></i> Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about_us.html"
+              <a class="nav-link" href="{{ url_for('about') }}"
                 ><i class="fas fa-info-circle me-1"></i> About</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="resource.html"
+              <a class="nav-link" href="{{ url_for('resource') }}"
                 ><i class="fas fa-cubes me-1"></i> Resources</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="live_news.html"
+              <a class="nav-link" href="{{ url_for('live_news') }}"
                 ><i class="fas fa-newspaper me-1"></i> Live News</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="geolocation.html"
+              <a class="nav-link active" href="{{ url_for('geolocation') }}"
                 ><i class="fas fa-location-arrow me-1"></i> Geolocation</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="forum.html"
+              <a class="nav-link" href="{{ url_for('forum') }}"
                 ><i class="fas fa-comments me-1"></i> Forum</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Donation.html"
+              <a class="nav-link" href="{{ url_for('donation') }}"
                 ><i class="fas fa-donate me-1"></i> Donate</a
               >
             </li>
@@ -652,9 +652,9 @@
     <footer>
       <p>&copy; 2026 GeoAid - Disaster Relief Platform. All rights reserved.</p>
       <p>
-        <a href="about_us.html">About Us</a> |
-        <a href="resource.html">Resources</a> |
-        <a href="Donation.html">Support Us</a>
+        <a href="{{ url_for('about') }}">About Us</a> |
+        <a href="{{ url_for('resource') }}">Resources</a> |
+        <a href="{{ url_for('donation') }}">Support Us</a>
       </p>
     </footer>
 

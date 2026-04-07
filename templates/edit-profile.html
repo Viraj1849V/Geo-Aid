@@ -32,7 +32,8 @@
       body {
         background:
           linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-          url("photos_bg/wall1.jpg") no-repeat center center fixed;
+          url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}")
+            no-repeat center center fixed;
         background-size: cover;
         color: var(--dark-color);
       }
@@ -321,8 +322,11 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container">
-        <a class="navbar-brand" href="home.html">
-          <img src="photos_bg/logo.png" alt="GeoAid Logo" />
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+          <img
+            src="{{ url_for('static', filename='photos_bg/logo.png') }}"
+            alt="GeoAid Logo"
+          />
         </a>
         <button
           class="navbar-toggler"
@@ -335,17 +339,17 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="home.html"
+              <a class="nav-link" href="{{ url_for('home') }}"
                 ><i class="fas fa-home me-1"></i> Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about_us.html"
+              <a class="nav-link" href="{{ url_for('about') }}"
                 ><i class="fas fa-info-circle me-1"></i> About Us</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="forum.html"
+              <a class="nav-link" href="{{ url_for('forum') }}"
                 ><i class="fas fa-comments me-1"></i> Forum</a
               >
             </li>
@@ -362,12 +366,12 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                 <li>
-                  <a class="dropdown-item" href="profile.html"
+                  <a class="dropdown-item" href="{{ url_for('profile') }}"
                     ><i class="fas fa-user me-2"></i>View Profile</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="edit-profile.html"
+                  <a class="dropdown-item" href="{{ url_for('edit_profile') }}"
                     ><i class="fas fa-edit me-2"></i>Edit Profile</a
                   >
                 </li>
@@ -472,7 +476,7 @@
             <button type="submit" class="btn-save">
               <i class="fas fa-save me-2"></i>Save Changes
             </button>
-            <a href="profile.html" class="btn-cancel">
+            <a href="{{ url_for('profile') }}" class="btn-cancel">
               <i class="fas fa-times me-2"></i>Cancel
             </a>
           </div>
@@ -498,7 +502,7 @@
         ></i>
         <h2>Access Denied</h2>
         <p>You need to be logged in to edit your profile.</p>
-        <a href="login.html" class="btn-login">Go to Login</a>
+        <a href="{{ url_for('login') }}" class="btn-login">Go to Login</a>
       </div>
     </div>
 
@@ -516,10 +520,10 @@
           <div class="col-md-6">
             <h5>Quick Links</h5>
             <ul class="list-unstyled">
-              <li><a href="about_us.html">About Us</a></li>
-              <li><a href="Donation.html">Donation</a></li>
-              <li><a href="volunteering.html">Volunteering</a></li>
-              <li><a href="resource.html">Resources</a></li>
+              <li><a href="{{ url_for('about') }}">About Us</a></li>
+              <li><a href="{{ url_for('donation') }}">Donation</a></li>
+              <li><a href="{{ url_for('volunteering') }}">Volunteering</a></li>
+              <li><a href="{{ url_for('resource') }}">Resources</a></li>
             </ul>
           </div>
         </div>
@@ -607,7 +611,7 @@
 
           // Redirect after 2 seconds
           setTimeout(() => {
-            window.location.href = "profile.html";
+            window.location.href = "{{ url_for('profile') }}";
           }, 2000);
         }
       }
@@ -628,7 +632,7 @@
         event.preventDefault();
         localStorage.removeItem("geoaid_logged_in");
         localStorage.removeItem("geoaid_current_user");
-        window.location.href = "home.html";
+        window.location.href = "{{ url_for('home') }}";
       }
     </script>
   </body>

@@ -287,9 +287,9 @@
   <body>
     <nav class="navbar navbar-expand-lg custom-navbar">
       <div class="container">
-        <a class="navbar-brand geo-aid-logo" href="home.html">
+        <a class="navbar-brand geo-aid-logo" href="{{ url_for('home') }}">
           <img
-            src="photos_bg/logo.png"
+            src="{{ url_for('static', filename='photos_bg/logo.png') }}"
             alt="GeoAid Logo"
             style="height: 40px; width: auto"
           />
@@ -308,33 +308,39 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="home.html">Home</a>
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="donation.html">Donation</a>
+              <a class="nav-link" href="{{ url_for('donation') }}">Donation</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="volunteering.html">Volunteering</a>
+              <a class="nav-link" href="{{ url_for('volunteering') }}"
+                >Volunteering</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="live_news.html">Live Updates</a>
+              <a class="nav-link" href="{{ url_for('live_news') }}"
+                >Live Updates</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="resource.html">Resource Allocation</a>
+              <a class="nav-link" href="{{ url_for('resource') }}"
+                >Resource Allocation</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="forum.html">Forum</a>
+              <a class="nav-link" href="{{ url_for('forum') }}">Forum</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="guidelines.html"
+              <a class="nav-link" href="{{ url_for('guidelines') }}"
                 >Survival Instructions</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about_us.html">About Us</a>
+              <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html">Login</a>
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             </li>
           </ul>
         </div>
@@ -402,7 +408,9 @@
       </form>
 
       <div class="login-footer">
-        <p>Don't have an account? <a href="register.html">Sign up</a></p>
+        <p>
+          Don't have an account? <a href="{{ url_for('register') }}">Sign up</a>
+        </p>
         <p><a href="#">Forgot password?</a></p>
       </div>
     </div>
@@ -433,7 +441,7 @@
           localStorage.setItem("geoaid_current_user", username);
 
           // Redirect to home page
-          window.location.href = "home.html";
+          window.location.href = "{{ url_for('home') }}";
         } else {
           errorDiv.textContent = "Invalid username or password.";
           errorDiv.style.display = "block";

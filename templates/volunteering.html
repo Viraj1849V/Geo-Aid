@@ -30,7 +30,7 @@
                 rgba(255, 255, 255, 0.85),
                 rgba(255, 255, 255, 0.85)
             ),
-            url('photos_bg/wall1.jpg') no-repeat center center fixed;
+            url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}") no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
         }
@@ -1216,14 +1216,14 @@
         <div class="container">
             <nav>
                 <a class="navbar-brand geo-aid-logo" href="#">
-                    <a href="home.html"><img src="photos_bg/logo.png" alt="GeoAid Logo" style="height: 60px; width: auto;">
+                    <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='photos_bg/logo.png') }}" alt="GeoAid Logo" style="height: 60px; width: auto;">
                   </a>
                 <ul class="nav-links">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="resource.html">Resources</a></li>
-                    <li><a href="live_news.html">Live News</a></li>
-                    <li><a href="forum.html">Forum</a></li>
-                    <li><a href="Donation.html">Donate</a></li>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('resource') }}">Resources</a></li>
+                    <li><a href="{{ url_for('live_news') }}">Live News</a></li>
+                    <li><a href="{{ url_for('forum') }}">Forum</a></li>
+                    <li><a href="{{ url_for('donation') }}">Donate</a></li>
                     <li><a href="#why-volunteer">Why Volunteer</a></li>
                     <li><a href="#roles">Volunteer Roles</a></li>
                     <li><a href="#how-to">How to Join</a></li>

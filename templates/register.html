@@ -418,7 +418,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="home.html">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
           <i class="fas fa-globe"></i> GeoAid
         </a>
         <button
@@ -432,32 +432,32 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="home.html"
+              <a class="nav-link" href="{{ url_for('home') }}"
                 ><i class="fas fa-home me-1"></i> Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about_us.html"
+              <a class="nav-link" href="{{ url_for('about') }}"
                 ><i class="fas fa-info-circle me-1"></i> About</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="resource.html"
+              <a class="nav-link" href="{{ url_for('resource') }}"
                 ><i class="fas fa-cubes me-1"></i> Resources</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="live_news.html"
+              <a class="nav-link" href="{{ url_for('live_news') }}"
                 ><i class="fas fa-newspaper me-1"></i> Live News</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="forum.html"
+              <a class="nav-link" href="{{ url_for('forum') }}"
                 ><i class="fas fa-comments me-1"></i> Forum</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html"
+              <a class="nav-link" href="{{ url_for('login') }}"
                 ><i class="fas fa-sign-in-alt me-1"></i> Login</a
               >
             </li>
@@ -609,9 +609,14 @@
 
         <!-- Footer -->
         <div class="register-footer">
-          <p>Already have an account? <a href="login.html">Login here</a></p>
+          <p>
+            Already have an account?
+            <a href="{{ url_for('login') }}">Login here</a>
+          </p>
           <p style="margin-top: 10px; font-size: 0.85rem; color: #999">
-            <a href="home.html" style="color: #69cae0">Back to Home</a>
+            <a href="{{ url_for('home') }}" style="color: #69cae0"
+              >Back to Home</a
+            >
           </p>
         </div>
       </div>
@@ -629,7 +634,7 @@
         <button
           type="button"
           class="btn-login"
-          onclick="window.location.href = 'login.html'"
+          onclick="window.location.href = '{{ url_for('login') }}'"
         >
           Go to Login
         </button>
@@ -756,7 +761,7 @@
 
           // Redirect after 3 seconds
           setTimeout(() => {
-            window.location.href = "login.html";
+            window.location.href = "{{ url_for('login') }}";
           }, 3000);
         }
       }

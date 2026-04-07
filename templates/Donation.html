@@ -18,7 +18,7 @@
         font-family: "Arial", sans-serif;
         background:
           linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-          url("photos_bg/wall1.jpg") no-repeat center center fixed;
+          url("{{ url_for('static', filename='photos_bg/wall1.jpg') }}") no-repeat center center fixed;
         background-size: cover;
         margin: 0;
         padding: 0;
@@ -428,8 +428,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg custom-navbar">
       <div class="container">
-        <a class="navbar-brand" href="home.html">
-          <img src="photos_bg/logo.png" alt="GeoAid Logo" />
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='photos_bg/logo.png') }}" alt="GeoAid Logo" />
         </a>
         <button
           class="navbar-toggler"
@@ -445,48 +445,48 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="home.html"
+              <a class="nav-link" href="{{ url_for('home') }}"
                 ><i class="fas fa-home me-1"></i> Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="donation.html"
+              <a class="nav-link" href="{{ url_for('donation') }}"
                 ><i class="fas fa-hand-holding-heart me-1"></i> Donation</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="volunteering.html"
+              <a class="nav-link" href="{{ url_for('volunteering') }}"
                 ><i class="fas fa-hands-helping me-1"></i> Volunteering</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="live_news.html"
+              <a class="nav-link" href="{{ url_for('live_news') }}"
                 ><i class="fas fa-newspaper me-1"></i> Live Updates</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="resource.html"
+              <a class="nav-link active" href="{{ url_for('resource') }}"
                 ><i class="fas fa-map-marked-alt me-1"></i> Resource
                 Allocation</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="guidelines.html"
+              <a class="nav-link" href="{{ url_for('guidelines') }}"
                 ><i class="fas fa-book-open me-1"></i> Survival Guide</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="forum.html"
+              <a class="nav-link" href="{{ url_for('forum') }}"
                 ><i class="fas fa-comments me-1"></i> Forum</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about_us.html"
+              <a class="nav-link" href="{{ url_for('about') }}"
                 ><i class="fas fa-info-circle me-1"></i> About Us</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html"
+              <a class="nav-link" href="{{ url_for('login') }}"
                 ><i class="fas fa-sign-in-alt me-1"></i> Login</a
               >
             </li>
@@ -501,7 +501,7 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img
-              src="photos_bg/donateslid1.jpg"
+              src="{{ url_for('static', filename='photos_bg/donateslid1.jpg') }}"
               class="d-block w-100"
               alt="Hospital"
             />
@@ -509,7 +509,7 @@
           </div>
           <div class="carousel-item">
             <img
-              src="photos_bg/donateslide2.jpeg"
+              src="{{ url_for('static', filename='photos_bg/donateslide2.jpeg') }}"
               class="d-block w-100"
               alt="Shelter"
             />
@@ -517,7 +517,7 @@
           </div>
           <div class="carousel-item">
             <img
-              src="photos_bg/donationslide3.jpg"
+              src="{{ url_for('static', filename='photos_bg/donationslide3.jpg') }}"
               class="d-block w-100"
               alt="Medical Facility"
             />
@@ -663,7 +663,7 @@
       </div>
       <div class="qr">
         <h6 class="text-center mt-3 fw-bold">Or Donate by QR</h6>
-        <img src="photos_bg/paymentQR.jpeg" alt="QR Code" class="qr-code" />
+        <img src="{{ url_for('static', filename='photos_bg/paymentQR.jpeg') }}" alt="QR Code" class="qr-code" />
         <button class="btn btn-donate mt-3">Donate Now</button>
       </div>
     </div>
@@ -681,7 +681,7 @@
     <!-- Donate Goods Form -->
     <div class="donate-goods">
       <img
-        src="photos_bg/don3.jpg"
+        src="{{ url_for('static', filename='photos_bg/don3.jpg') }}"
         alt="Donate Goods"
         class="donate-goods-img"
       />
@@ -701,7 +701,7 @@
       <h3>🎥 Watch How Your Donations Make an Impact</h3>
       <video controls>
         <source
-          src="photos_bg/invideo-ai-480 Join Hands to Rebuild Lives! 2025-03-31 (1) (online-video-cutter.com).mp4"
+          src="{{ url_for('static', filename='photos_bg/invideo-ai-480 Join Hands to Rebuild Lives! 2025-03-31 (1) (online-video-cutter.com).mp4') }}"
           type="video/mp4"
         />
       </video>
